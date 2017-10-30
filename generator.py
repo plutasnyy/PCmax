@@ -36,7 +36,12 @@ def save_instance(instance):
         open_file.write(instance)
 
 def generate():
+    if RAND_PROC:
+        PROCESSORS = randint(MIN_PROC, MAX_PROC)
 
+    if RAND_EX:
+        EXERCIESES = randint(MIN_EX, MAX_EX)
+        
     proc_array = list()
     for i in range(PROCESSORS):
         proc_array.append(Proc(i))
