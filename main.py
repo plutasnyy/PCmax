@@ -1,2 +1,5 @@
 from greedy import greedy
-greedy()
+from generator import generate
+
+generate()
+#greedy()
