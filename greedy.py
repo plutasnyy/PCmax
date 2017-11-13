@@ -24,5 +24,5 @@ def greedy():
 
     print(return_proc(proc_array, rev=True).time)
 
-    #for i in proc_array:
-    #    i.print_proc()
+    for i in proc_array:
+        i.print_proc()
