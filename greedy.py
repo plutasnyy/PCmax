@@ -7,7 +7,10 @@ def load_data():
         proc, ex, file = int(file[0]), int(file [1]), file[2:]
         for line in file:
             try:
-                data.append(int(line))
+                time = int(line)
+                if time > 0:
+                    data.append(time)
+
             except:
                 pass
         return proc, ex, sorted(data, reverse=True)
