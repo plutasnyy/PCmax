@@ -11,6 +11,9 @@ def load_data():
                 if time > 0:
                     data.append(time)
 
+                else:
+                    raise AttributeError
+
             except:
                 pass
         return proc, ex, sorted(data, reverse=True)
