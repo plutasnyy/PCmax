@@ -4,11 +4,11 @@ from load_data import load_data
 from copy import deepcopy
 from genetic import GeneticAlghoritm
 
-#generate()
+generate()
 data = load_data()
 #greedy_output = greedy(deepcopy(data))
 genetic = GeneticAlghoritm(
-    data = [1,2,3,4,5],
+    data = data,
     population_size = 20,
     time_limit = 5
 
