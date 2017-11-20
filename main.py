@@ -3,14 +3,20 @@ from generator import generate
 from load_data import load_data
 from copy import deepcopy
 from genetic import GeneticAlghoritm
+from proc_class import *
 
 generate()
 data = load_data()
-#greedy_output = greedy(deepcopy(data))
+out=greedy(deepcopy(data))
+print(return_proc(out,rev=True).time)
+a,b,c=data
+c=sorted(c,reverse=True)
+out = greedy([a,b,c])
+print(return_proc(out,rev=True).time)
 genetic = GeneticAlghoritm(
-    data = [3,10,[1,2,2,2,2,2,2,8,9,10]],
-    population_size = 2,
-    time_limit = 5
+    data = data,
+    population_size = 50,
+    time_limit = 60*5
 
 )
 genetic.start()

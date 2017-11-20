@@ -14,4 +14,4 @@ def load_data():
 
             except:
                 pass
-        return proc, ex, sorted(data, reverse=True)
+        return proc, ex, data
