@@ -83,6 +83,9 @@ class GeneticAlghoritm(object):
         print(child)
         return child
 
+    def mutation(self, chromosome):
+        a,b = self.two_random_numbers_from_interval(range(len(chromosome)))
+        chromosome[a], chromosome[b] = chromosome[b], chromosome[a]
 
     def start(self):
         start_time = time()
@@ -94,5 +97,8 @@ class GeneticAlghoritm(object):
                 population[i] = self.fitness(chromosome)
             #print(self.fitness(sorted(self.data,reverse=True)))
 
-            self.crossover(population[0][0], population[1][0])
+            #self.crossover(population[0][0], population[1][0])
+            print(population[0][0])
+            self.mutation(population[0][0])
+            print(population[0][0])
             break
