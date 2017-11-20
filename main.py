@@ -6,9 +6,11 @@ from genetic import GeneticAlghoritm
 
 #generate()
 data = load_data()
-greedy_output = greedy(deepcopy(data))
+#greedy_output = greedy(deepcopy(data))
 genetic = GeneticAlghoritm(
-    initial=greedy_output,
-    population_size = 5000,
+    data = [1,2,3,4,5],
+    population_size = 20,
+    time_limit = 5
 
 )
+genetic.start()
