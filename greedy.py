@@ -1,19 +1,17 @@
-from proc_class import*
-from load_data import load_data
+from proc import Proc
+from moderator import Moderator
 
-def greedy(input_data):
-    proc_array = list()
-    [proc, ex, data] = input_data
+class Greedy(Moderator):
+    def start(self, data):
+        self.array_proc = list()
 
-    for i in range(proc):
-        proc_array.append(Proc(i))
+        for i in range(data.proc):
+            self.array_proc.append(Proc(i))
 
-    for i in data:
-        return_proc(proc_array).add_ex(i)
+        for i in data.array_exs:
+            self.return_proc(self.array_proc).add_ex(i)
 
-    #print(return_proc(proc_array, rev=True).time)
+        return self.array_proc
 
-    #for i in proc_array:
-    #    i.print_proc()
-
-    return proc_array
+    def output_time(self):
+        return self.return_proc(self.array_proc,rev=True).time

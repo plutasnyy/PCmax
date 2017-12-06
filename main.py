@@ -1,22 +1,30 @@
-from greedy import greedy
-from generator import generate
-from load_data import load_data
-from copy import deepcopy
+from greedy import Greedy
+from generator import Generator
+from data import Data
 from genetic import GeneticAlghoritm
-from proc_class import *
+from copy import deepcopy
 
-generate()
-data = load_data()
-out=greedy(deepcopy(data))
-print(return_proc(out,rev=True).time)
-a,b,c=data
-c=sorted(c,reverse=True)
-out = greedy([a,b,c])
-print(return_proc(out,rev=True).time)
-genetic = GeneticAlghoritm(
-    data = data,
-    population_size = 50,
-    time_limit = 60*5
+generator = Generator()
+#generator.generate()
 
-)
-genetic.start()
+data = Data()
+data.load_data('data.txt')
+
+greedy = Greedy()
+greedy.start(data)
+print("Greedy: ", greedy.output_time())
+
+data.array_exs = sorted(data.array_exs, reverse=True)
+
+greedy.start(data)
+print("Greedy z posorotowanym inputem: ",greedy.output_time())
+
+
+for i in range(10,101,5):
+    genetic = GeneticAlghoritm(
+        data = deepcopy(data),
+        population_size = i,
+        time_limit = 30,
+
+    )
+    genetic.start()
