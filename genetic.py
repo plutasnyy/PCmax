@@ -1,8 +1,9 @@
 from time import time
 from random import shuffle, sample, uniform
 from copy import deepcopy
-from greedy import Greedy
 import math
+
+from greedy import Greedy
 
 class GeneticAlghoritm(object):
     def __init__(self, data, population_size, time_limit):
@@ -11,6 +12,7 @@ class GeneticAlghoritm(object):
         self.time_limit = time_limit
         self.optimum = math.ceil(sum(self.data.array_exs)/self.data.proc)
         self.greedy = Greedy()
+        self.generation_best_time = 1
         self.best_time = None
 
     def generate_random_population(self):
@@ -36,6 +38,7 @@ class GeneticAlghoritm(object):
             self.best_time = chromosome_time
         elif chromosome_time < self.best_time:
             self.best_time = chromosome_time
+            self.generation_best_time = self.generation
 
         return fitness
 
@@ -99,7 +102,7 @@ class GeneticAlghoritm(object):
         population = self.generate_random_population()
         weighted_population = [None] * self.population_size
         new_population = list()
-
+        self.generation = 1
         while time() - start_time < self.time_limit:
             for i in range(len(population)):
                 chromosome = population[i]
@@ -123,5 +126,7 @@ class GeneticAlghoritm(object):
 
             population = deepcopy(new_population)
             new_population.clear()
+            self.generation += 1
 
-        print(self.best_time)
+        print("Genetyczny rozmiar populacji: {} czas: {}s pokolenia: {} wynik: {} z pokolenia: {}".format(
+            self.population_size,self.time_limit,self.generation,self.best_time, self.generation_best_time))
