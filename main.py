@@ -1,29 +1,13 @@
 from copy import deepcopy
-import math
-import sys
 
 from greedy import Greedy
-from generator import Generator
 from data import Data
 from genetic import GeneticAlghoritm
 
-def select_input_data():
-    data_array = ['data.txt','m25.txt','m50.txt','m50n200.txt','m50n1000.txt']
-    try:
-        index = int(sys.argv[1])
-        return data_array[index]
-    except:
-        return data_array[0]
-
-
-generator = Generator()
-#generator.generate()
-
 data = Data()
-data_path = select_input_data()
-data.load_data(data_path)
-print("Wykonuje: ",data_path)
-print("Oczekiwane optimum: ",math.ceil(sum(data.array_exs)/data.proc))
+data.random()
+data.select_input_data()
+data.load_data()
 
 greedy = Greedy()
 greedy.start(data)
