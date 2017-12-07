@@ -103,7 +103,7 @@ class GeneticAlghoritm(object):
         weighted_population = [None] * self.population_size
         new_population = list()
         self.generation = 1
-        
+
         while time() - start_time < self.time_limit:
             for i in range(len(population)):
                 chromosome = population[i]

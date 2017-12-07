@@ -34,7 +34,7 @@ class Generator(Moderator):
         return instance
 
     def save_instance(self, instance):
-        with open('data.txt', 'w') as open_file:
+        with open('data/data.txt', 'w') as open_file:
             open_file.write(instance)
 
     def generate(self):
