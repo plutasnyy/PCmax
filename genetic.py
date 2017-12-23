@@ -127,7 +127,6 @@ class GeneticAlghoritm(object):
                     self.mutation(child, mut_start, mut_end)
                     new_population.append(child)
                     parent_one, parent_two = parent_two, parent_one
-
             population = deepcopy(new_population)
             new_population.clear()
             self.generation += 1

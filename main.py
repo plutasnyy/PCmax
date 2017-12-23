@@ -17,11 +17,12 @@ data.array_exs = sorted(data.array_exs, reverse=True)
 greedy.start(data)
 print("Greedy with sorted input: ",greedy.output_time())
 
-for i in range(20,101,1):
-    genetic = GeneticAlghoritm(
-        data = data,
-        population_size = i,
-        time_limit = 60,
+for j in range(10,121,10):
+    for i in range(5,30,1):
+        genetic = GeneticAlghoritm(
+            data = data,
+            population_size = i,
+            time_limit = j,
 
-    )
-    genetic.start()
+        )
+        genetic.start()
