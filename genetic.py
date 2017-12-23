@@ -132,7 +132,7 @@ class GeneticAlghoritm(object):
             new_population.clear()
             self.generation += 1
 
-        print("Genetyczny rozmiar populacji: {} czas: {}s pokolenia: {} wynik: {} z pokolenia: {}".format(
+        print("Genetic, population size: {} time: {}s generations: {} score: {} in generation: {}".format(
             self.population_size, self.time_limit, self.generation, self.best_time, self.generation_best_time))
 
         self.data.save_best(self.best_time, self.best_vector)

@@ -15,7 +15,7 @@ print("Greedy: ", greedy.output_time())
 data.array_exs = sorted(data.array_exs, reverse=True)
 
 greedy.start(data)
-print("Greedy z posorotowanym inputem: ",greedy.output_time())
+print("Greedy with sorted input: ",greedy.output_time())
 
 for i in range(20,101,1):
     genetic = GeneticAlghoritm(

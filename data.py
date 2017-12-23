@@ -10,7 +10,7 @@ class DataManager(object):
         self.initial_vector = None
 
     def load_data(self):
-        print("Wykonuje: ", self.data_path)
+        print("Doing: ", self.data_path)
 
         with open('data/{0}.txt'.format(self.data_path), 'r') as open_file:
             file = open_file.read().split('\n')
@@ -28,7 +28,7 @@ class DataManager(object):
                 except:
                     print("Bad input line:", line)
 
-        print("Oczekiwane optimum: ", math.ceil(sum(self.array_exs) / self.proc))
+        print("Expected optimum: ", math.ceil(sum(self.array_exs) / self.proc))
 
     def set_array_exs(self, new_array):
         self.array_exs = new_array
