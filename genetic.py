@@ -5,22 +5,24 @@ import math
 
 from greedy import Greedy
 
+
 class GeneticAlghoritm(object):
     def __init__(self, data, population_size, time_limit):
         self.data = data
         self.population_size = population_size
         self.time_limit = time_limit
-        self.optimum = math.ceil(sum(self.data.array_exs)/self.data.proc)
+        self.optimum = math.ceil(sum(self.data.array_exs) / self.data.proc)
         self.greedy = Greedy()
         self.generation_best_time = 1
         self.best_time = None
+        self.best_vector = None
 
-    def generate_random_population(self):
+    def generate_new_population(self):
         population = []
-        copy_data = deepcopy(self.data.array_exs)
         for i in range(self.population_size):
-            shuffle(copy_data)
-            population.append(deepcopy(sorted(copy_data,reverse=True)))
+            initial_vector = self.data.return_initial_vector()
+            population.append(deepcopy(initial_vector))
+
         return population
 
     def fitness(self, chromosome):
@@ -36,10 +38,11 @@ class GeneticAlghoritm(object):
 
         if self.best_time == None:
             self.best_time = chromosome_time
+            self.best_vector = deepcopy(chromosome)
         elif chromosome_time < self.best_time:
             self.best_time = chromosome_time
             self.generation_best_time = self.generation
-
+            self.best_vector = deepcopy(chromosome)
         return fitness
 
     def two_random_numbers_from_interval(self, interval):
@@ -60,7 +63,7 @@ class GeneticAlghoritm(object):
         second_interval = parent_two[start_section:end_section]
         rest_of_second_parent = parent_two[:start_section] + parent_two[end_section:]
 
-        for i in interval: #select data to fill
+        for i in interval:  # select data to fill
             if i in rest_of_second_parent:
                 rest_of_second_parent.remove(i)
             elif i in second_interval:
@@ -86,7 +89,7 @@ class GeneticAlghoritm(object):
     def mutation(self, chromosome, a, b):
         chromosome[a], chromosome[b] = chromosome[b], chromosome[a]
 
-    def select_with_probability(self,population):
+    def select_with_probability(self, population):
         weight_sum = sum([x[1] for x in population])
         rand_value = uniform(0, weight_sum)
         for chromosome, fitness in population:
@@ -98,8 +101,8 @@ class GeneticAlghoritm(object):
 
     def start(self):
         start_time = time()
-
-        population = self.generate_random_population()
+        self.data.load_best_vector()
+        population = self.generate_new_population()
         weighted_population = [None] * self.population_size
         new_population = list()
         self.generation = 1
@@ -112,7 +115,7 @@ class GeneticAlghoritm(object):
                 chromosome_fitness = 1 if fit_output == 0 else fit_output
                 weighted_population[i] = (chromosome, chromosome_fitness)
 
-            for _ in range(int(len(population)/2)):
+            for _ in range(int(len(population) / 2)):
                 parent_one = self.select_with_probability(weighted_population)
                 parent_two = self.select_with_probability(weighted_population)
 
@@ -120,7 +123,7 @@ class GeneticAlghoritm(object):
                 mut_start, mut_end = self.two_random_numbers_from_interval(chromosome)
 
                 for _ in range(2):
-                    child = self.crossover(parent_one,parent_two,cros_start,cros_end)
+                    child = self.crossover(parent_one, parent_two, cros_start, cros_end)
                     self.mutation(child, mut_start, mut_end)
                     new_population.append(child)
                     parent_one, parent_two = parent_two, parent_one
@@ -130,4 +133,6 @@ class GeneticAlghoritm(object):
             self.generation += 1
 
         print("Genetyczny rozmiar populacji: {} czas: {}s pokolenia: {} wynik: {} z pokolenia: {}".format(
-            self.population_size,self.time_limit,self.generation,self.best_time, self.generation_best_time))
+            self.population_size, self.time_limit, self.generation, self.best_time, self.generation_best_time))
+
+        self.data.save_best(self.best_time, self.best_vector)

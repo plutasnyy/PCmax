@@ -1,11 +1,10 @@
 from copy import deepcopy
 
 from greedy import Greedy
-from data import Data
+from data import DataManager
 from genetic import GeneticAlghoritm
 
-data = Data()
-data.random()
+data = DataManager()
 data.select_input_data()
 data.load_data()
 
@@ -20,7 +19,7 @@ print("Greedy z posorotowanym inputem: ",greedy.output_time())
 
 for i in range(20,101,1):
     genetic = GeneticAlghoritm(
-        data = deepcopy(data),
+        data = data,
         population_size = i,
         time_limit = 60,
 

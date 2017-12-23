@@ -11,5 +11,3 @@ class Proc(object):
 
     def print_proc(self):
         print("ID: {0}, Time: {1}, Ex: {2}".format(self.id, self.time, ' '.join(map(str, self.ex))))
-
-
