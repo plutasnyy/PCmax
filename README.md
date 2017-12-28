@@ -56,6 +56,6 @@ MAX_EX_TIME = 5000
 ```
 
 ### Description
-The chromosome is represented by the input vector into the awful algorithm. Mutation was implemented as swaping two elements in chromosome. Crossing, however, by crossover by order.  
+The chromosome is represented by the input vector into the greedy algorithm. Mutation was implemented as swaping two elements in chromosome. Crossing, however, by crossover by order.  
 In the fitness function, the absolute value of the distance from the expected optimum is evaluated.  
 For optimized cases, the program was confused by 1-2 units of time :D
