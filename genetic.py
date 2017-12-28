@@ -120,13 +120,14 @@ class GeneticAlghoritm(object):
                 parent_two = self.select_with_probability(weighted_population)
 
                 cros_start, cros_end = self.two_random_numbers_from_interval(chromosome)
-                mut_start, mut_end = self.two_random_numbers_from_interval(chromosome)
 
                 for _ in range(2):
                     child = self.crossover(parent_one, parent_two, cros_start, cros_end)
+                    mut_start, mut_end = self.two_random_numbers_from_interval(chromosome)
                     self.mutation(child, mut_start, mut_end)
                     new_population.append(child)
                     parent_one, parent_two = parent_two, parent_one
+
             population = deepcopy(new_population)
             new_population.clear()
             self.generation += 1
