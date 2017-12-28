@@ -19,7 +19,7 @@ In main.py:
 ```
 genetic = GeneticAlghoritm(
     data = data,
-    population_size = i, # set your population size, recommend 20-40
+    population_size = i, # set your population size, recommended 20-40
     time_limit = j, # and execution time
 )
 ```
